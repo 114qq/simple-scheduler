@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+            http://maven.apache.org/POM/4.0.0
+            https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Maven 坐标 -->
+    <groupId>io.github.114qq</groupId>
+    <artifactId>simple-scheduler</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <!-- 项目信息 -->
+    <name>Simple Scheduler</name>
+
+    <description>
+        A lightweight Java Cron scheduler based on simple-cron and DelayQueue.
+        支持 Cron 调度、DelayQueue、调度线程和工作线程池。
+    </description>
+
+    <url>https://github.com/114qq/simple-scheduler</url>
+
+    <!-- License -->
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <!-- 开发者 -->
+    <developers>
+        <developer>
+            <name>114qq</name>
+            <url>https://github.com/114qq</url>
+        </developer>
+    </developers>
+
+    <!-- Git 仓库 -->
+    <scm>
+        <connection>
+            scm:git:https://github.com/114qq/simple-scheduler.git
+        </connection>
+
+        <developerConnection>
+            scm:git:ssh://git@github.com/114qq/simple-scheduler.git
+        </developerConnection>
+
+        <url>
+            https://github.com/114qq/simple-scheduler
+        </url>
+
+        <tag>HEAD</tag>
+    </scm>
+
+    <!-- Java 8 -->
+    <properties>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <junit.version>5.11.0</junit.version>
+        <simple-cron.version>1.0.0</simple-cron.version>
+
+        <project.build.outputTimestamp>2026-08-28T00:00:00Z</project.build.outputTimestamp>
+
+    </properties>
+
+    <!-- 依赖 -->
+    <dependencies>
+
+        <!-- Simple Cron -->
+        <dependency>
+            <groupId>io.github.114qq</groupId>
+            <artifactId>simple-cron</artifactId>
+            <version>${simple-cron.version}</version>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <!-- 构建 -->
+    <build>
+
+        <plugins>
+
+            <!-- Java 8 编译 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- JUnit 5 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+            </plugin>
+
+            <!-- Source JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.1</version>
+
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Javadoc JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.11.2</version>
+
+                <configuration>
+                    <source>8</source>
+                    <doclint>none</doclint>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Maven Central Publishing -->
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.9.0</version>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
+            </plugin>
+
+            <!-- GPG 签名 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.2.7</version>
+
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <keyname>00F3ED6725DF44BD</keyname>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+</project>
